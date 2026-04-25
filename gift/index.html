@@ -147,7 +147,26 @@
     <h1>✅ Submission Received</h1>
     <p>Thank you. Our VIP team will proceed with the arrangement shortly.</p>
   </div>
-
+  
+  <!-- Netlify form detection helper -->
+  <form name="gift_redemption" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="gift_redemption">
+    <input name="full_name">
+    <input name="country_code">
+    <input name="phone_number">
+    <input name="country">
+    <input name="state">
+    <input name="city">
+    <input name="street_address">
+    <input name="postal_code">
+    <input name="email">
+    <input name="feedback_message">
+    <input name="vip_name">
+    <input name="gift_name">
+    <input name="vip_code">
+    <input name="kam_owner">
+    <input name="campaign_month">
+  </form>
   <script>
     const params = new URLSearchParams(window.location.search);
 
