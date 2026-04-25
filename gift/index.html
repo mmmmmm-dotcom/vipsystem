@@ -123,13 +123,13 @@
   const name = params.get("name");
   const gift = params.get("gift");
 
-  if (name || gift) {
-    document.getElementById("title").innerText =
-      `🎁 Dear ${name || "VIP"}, your ${gift || "reward"} is ready`;
+if (name || gift) {
+  document.getElementById("title").innerText =
+    `🎁 Dear ${name || "VIP"}, your ${gift || "reward"} is ready`;
 
-    document.getElementById("subtitle").innerText =
-      "Please confirm your delivery details to proceed.";
-  }
+  document.getElementById("subtitle").innerText =
+    "Please confirm your delivery details to proceed.";
+}
 </script>
 </body>
 </html>
